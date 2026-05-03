@@ -43,7 +43,8 @@ namespace Wildgrass
                     Plant.Sounds.GetBreakSound(byPlayer),
                     faceSel.Position.X,
                     faceSel.Position.Y,
-                    faceSel.Position.Z);
+                    faceSel.Position.Z,
+                    faceSel.Position.dimension);
                 slot.TakeOut(1);
                 slot.MarkDirty();
                 handling = EnumHandHandling.PreventDefaultAction;

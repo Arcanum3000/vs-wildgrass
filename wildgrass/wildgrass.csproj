@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
   </PropertyGroup>
@@ -11,12 +11,16 @@
       <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="VSSurvivalMod">
+	<Reference Include="VSEssentials">
+	    <HintPath>$(VINTAGE_STORY)/Mods/VSEssentials.dll</HintPath>
+		<Private>False</Private>
+	</Reference>
+	<Reference Include="VSSurvivalMod">
       <HintPath>$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Biomes">
-      <HintPath>/home/jon/.config/VintagestoryDataDev/Mods/biomes/Biomes.dll</HintPath>
+      <HintPath>C:\Users\Arcanum\source\repos\Biomes\Biomes\bin\Debug\Mods\biomes\Biomes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft">
