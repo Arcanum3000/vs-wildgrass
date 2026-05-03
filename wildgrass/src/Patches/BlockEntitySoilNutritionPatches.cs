@@ -50,7 +50,6 @@ static class BlockEntitySoilNutrition_UpdatePatch
                 .ThrowIfInvalid("Failed patch BlockEntitySoilNutrition.beginIntervalledUpdate")
                 .Repeat((cm) =>
                 {
-                    WildgrassCore.Instance.api.Logger.Error("Ping!");
                     cm.RemoveInstruction();
                     cm.InsertAndAdvance(
                         CodeInstruction.Call(() => WildgrassWeed(default, default, default)));
