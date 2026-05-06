@@ -14,7 +14,7 @@ using Vintagestory.GameContent;
 
 namespace Wildgrass;
 
-[HarmonyPatch(typeof(BlockEntitySoilNutrition), "beginIntervalledUpdate")]
+[HarmonyPatch]
 static class BlockEntitySoilNutrition_UpdatePatch
 {
     static void WildgrassWeed(IBlockAccessor blockAccessor, int blockId, BlockPos abovePos)
@@ -39,6 +39,14 @@ static class BlockEntitySoilNutrition_UpdatePatch
         blockAccessor.SetBlock(blockId, abovePos);
     }
 
+    internal static MethodInfo TargetMethod()
+    {
+        var closures = AccessTools.FirstInner(
+            typeof(BlockEntitySoilNutrition),
+            t => t.Name.Contains("DisplayClass29_0"));
+        return AccessTools.Method(closures, "<beginIntervalledUpdate>b__1");
+    }
+
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         try {
@@ -47,7 +55,7 @@ static class BlockEntitySoilNutrition_UpdatePatch
                 .MatchStartForward(
                     CodeMatch.Calls( () => default(IBlockAccessor).SetBlock(default, default) )                    
                 )
-                .ThrowIfInvalid("Failed patch BlockEntitySoilNutrition.beginIntervalledUpdate")
+                .ThrowIfInvalid("Failed patch BlockEntitySoilNutrition.beginIntervalledUpdate delegate b__1")
                 .Repeat((cm) =>
                 {
                     cm.RemoveInstruction();
@@ -60,7 +68,7 @@ static class BlockEntitySoilNutrition_UpdatePatch
             var cminstructions = codeMatcher.Instructions();
             return cminstructions;
         } catch(Exception e) {
-            WildgrassCore.Instance.api.Logger.Error($"Exception patching BlockEntitySoilNutrition.beginIntervalledUpdate : {e}");
+            WildgrassCore.Instance.api.Logger.Error($"Exception patching BlockEntitySoilNutrition.beginIntervalledUpdate delegate b__1: {e}");
             return instructions;
         }
     }
